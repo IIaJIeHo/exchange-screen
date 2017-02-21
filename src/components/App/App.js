@@ -24,10 +24,21 @@ class App extends Component {
         "USD": "30",
         "RUB": "10",
         "EUR": "15"
-      }
+      },
+      activeChange: 0
 
     }
-  }   
+
+    this.onExchange = this.onExchange.bind(this);
+  }
+
+  onExchange(e){
+    let val = e.target.value;
+    console.log(val);
+    this.setState({activeChange: +val});
+  }
+
+
   render() {
 
     var settings = {
@@ -37,8 +48,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Currency {...this.state} type="start" />
-        <Currency {...this.state} current={this.state.next} type="end" />
+        <Currency {...this.state} type="start" onExchange={this.onExchange} />
+        <Currency {...this.state} type="end" />
         <Numbers />
       </div>
     );
