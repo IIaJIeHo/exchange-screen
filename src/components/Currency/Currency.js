@@ -3,21 +3,46 @@ import Slider from 'react-slick';
 import './Currency.css';
 
 class Currency extends Component {
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+
+    }
+  }
+
   render() {
 
-    var settings = {
-      dots: true
+    let rates = this.props.rates;
+    let ratesKeys = Object.keys(rates);
+
+    let settings = {
+      dots: true,
+      arrows: false,
+      initialSlide: ratesKeys.indexOf(this.props.current) != -1 ? ratesKeys.indexOf(this.props.current) : 0,
+      afterChange: function (currentSlide) {
+        console.log('after change', currentSlide); /* sent a callback to parent */
+      },
     };
+
+    let slides = ratesKeys.map((key,i) =>
+      <div key={i}>
+        {this.props.type == "start" ? <input type="text" /> : ''}
+        <h5>{key}</h5>
+        <p>{rates[key]}</p>
+        <p>amount:{this.props.pocket[this.props.current]}</p>
+      </div>
+      );
+
+    
+
+
 
     return (
       <div className="currency">
-        <Slider {...settings}>
-          <div><h3>1</h3></div>
-          <div><h3>2</h3></div>
-          <div><h3>3</h3></div>
-          <div><h3>4</h3></div>
-          <div><h3>5</h3></div>
-          <div><h3>6</h3></div>
+        <Slider ref={(input) => { this.slider = input; }}  {...settings}>
+          {slides}
         </Slider>
       </div>
     );
