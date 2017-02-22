@@ -1,7 +1,14 @@
 export default {
-  authors: [],
-  courses: [],
-  mycourses: [],
-  ajaxCallsInProgress: 0,
-  active: {'Default':0, 'Primary':0, 'Success':0, 'Info':0, 'Warning':0, 'Danger':0, 'Link':0}
+  rates: {
+      "EUR": 0.949485,
+      "RUB": 57.767,
+      "USD": 1,
+    },
+  current: "EUR",
+  next: "RUB",
+  pocket: {
+    "USD": 30,
+    "RUB": 10,
+    "EUR": 15
+  }
 };

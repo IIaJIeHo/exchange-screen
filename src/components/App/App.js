@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import * as exchangeActions from '../../actions/exchangeActions';
 import Slider from 'react-slick';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Currency from '../Currency/Currency';
 import Header from '../Header/Header';
 import Numbers from '../Numbers/Numbers';
@@ -30,6 +33,9 @@ class App extends Component {
       }
 
     }
+
+    console.log('this.props.rates');
+    console.log(this.props.current);
 
     this.onExchange = this.onExchange.bind(this);
     this.setCurrentCurrency = this.setCurrentCurrency.bind(this);
@@ -86,4 +92,23 @@ class App extends Component {
   }
 }
 
-export default App;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    ...state
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(exchangeActions, dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+
+
+
