@@ -1,0 +1,14 @@
+.slide {
+  font-size: 0;
+}
+.slide-column{
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+.slide-column h3 {
+  font-size: 30px;
+}
+.slide-column p {
+  font-size: 16px;
+}
