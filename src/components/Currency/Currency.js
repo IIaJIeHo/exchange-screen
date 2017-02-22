@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import './Currency.css';
+import Slide from '../Slide/Slide';
 
 class Currency extends Component {
 
@@ -8,42 +9,57 @@ class Currency extends Component {
     super(props);
   
     this.state = {
-
+      
     }
+
+    
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
-  conversionResult(currency){
-    return +this.props.activeChange * this.props.rates[currency] / this.props.rates[this.props.current];
+  onInputChange(val){
+    let currency = this.props.current;
+    let payload = {};
+    payload[currency] = val;
+    let activeChange = Object.assign({}, this.props.activeChange,payload);
+    this.props.onInputChange(activeChange);
   }
+
+  onChange(e){
+    console.log(e.target.value);
+    let val = e.target.value;
+    let currency = this.props.current;
+    let payload = {};
+    payload[currency] = +val;
+    let activeChange = Object.assign({}, this.state.activeChange,payload);
+    console.log(activeChange);
+    this.setState({activeChange: +e.target.value});
+    this.props.onInputChange(activeChange);
+  }
+
 
   render() {
-
+    let that = this;
     let rates = this.props.rates;
     let ratesKeys = Object.keys(rates);
     let currentCurrency = this.props.type == "start" ? this.props.current : this.props.next;
+
+    //this.slider ? this.slider.slickGoTo(ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0) : null;
 
     let settings = {
       dots: true,
       arrows: false,
       initialSlide: ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0,
       afterChange: function (currentSlide) {
-        console.log('after change', currentSlide); /* sent a callback to parent */
+        let currency = ratesKeys[currentSlide];
+        that.props.setCurrentCurrency(currency,that.props.type);
       },
     };
 
     let slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        {this.props.type == "start" ? <input type="text" onChange={this.props.onExchange}/> : 
-         this.props.type == "end" ? <p>Result: {this.conversionResult(key)}</p> : ''}
-        <h5>{key}</h5>
-        <p>{rates[key]}</p>
-        <p>amount:{this.props.pocket[currentCurrency]}</p>
+        <Slide  {...this.props} currency={key} onInputChange={this.onInputChange} active={this.props.activeChange[key]} />
       </div>
       );
-
-    
-
-
 
     return (
       <div className="currency">
