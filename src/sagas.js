@@ -5,12 +5,6 @@ import * as exchangeActions from './actions/exchangeActions';
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
-export function* incrementAsync() {
-  yield delay(1000);
-  yield put({ type: 'START_RATES' });
-  yield put({ type: 'START_RATES_ASYNC' });
-}
-
 function fetchVersion(){
   return axios({
     method: 'get',
@@ -28,11 +22,11 @@ export function* fetchData(action) {
       yield put({type: "START_RATES", rates});
       yield put({ type: 'START_RATES_ASYNC' });
    } catch (error) {
-      yield put({type: "START_RATES", error});
+      yield put({type: "START_RATES_ERROR", error});
    }
 }
 
-// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+
 export function* startRates() {
   yield takeEvery('START_RATES_ASYNC', fetchData)
 }

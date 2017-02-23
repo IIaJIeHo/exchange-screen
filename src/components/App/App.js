@@ -95,7 +95,7 @@ function mapStateToProps(state, ownProps) {
       rates = {};
 
   availableCurrencies.forEach(function(cur){
-    if (state.rates[cur]){
+    if (state.rates&&state.rates[cur]){
       rates[cur] = state.rates[cur];
     }
   });

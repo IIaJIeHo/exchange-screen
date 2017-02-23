@@ -20,6 +20,11 @@ export default function exchangeReducer(state = initialState, action) {
       console.log('start rates');
       return Object.assign({}, state, {'rates': action.rates});
 
+    case types.START_RATES_ERROR:
+      console.log('start rates error');
+      console.log(action.error);
+      return state;
+
     default:
       return state;
   }
