@@ -36,6 +36,19 @@ class Currency extends Component {
     this.props.onInputChange(activeChange);
   }
 
+  componentWillReceiveProps(props){
+    console.log('componentWillReceiveProps props props');
+    console.log(props);
+    let rates = Object.keys(props.rates);
+
+    if (props.type == "start"){
+      this.slider.slickGoTo(rates.indexOf(props.current));
+    } else {
+      this.slider.slickGoTo(rates.indexOf(props.next));
+    }
+    
+  }
+
 
   render() {
     console.log('activeChange Currency');
@@ -44,13 +57,19 @@ class Currency extends Component {
     let rates = this.props.rates;
     let ratesKeys = Object.keys(rates);
     let currentCurrency = this.props.type == "start" ? this.props.current : this.props.next;
-
+    console.log('currentCurrency123');
+    console.log(currentCurrency);
     //this.slider ? this.slider.slickGoTo(ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0) : null;
 
     let settings = {
       dots: true,
       arrows: false,
       initialSlide: ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0,
+      beforeChange: function(i,e){
+        console.log('beforeChange');
+        console.log(i);
+        console.log(e);
+      },
       afterChange: function (currentSlide) {
         let currency = ratesKeys[currentSlide];
         that.props.setCurrentCurrency(currency,that.props.type);

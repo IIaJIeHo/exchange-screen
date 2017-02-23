@@ -66,6 +66,27 @@ class App extends Component {
 
   setCurrentCurrency(currency,type) {
     type == "start" ? this.setState({current: currency}) : this.setState({next: currency});
+    if (type == "start") {
+      if (currency ==  this.state.next) {
+        let rates = Object.keys(this.props.rates);
+        let nextIndex = rates.indexOf(this.state.next);
+        let newNext = rates[nextIndex - 1];
+        console.log('newNext');
+        console.log(newNext);
+        this.setState({next: newNext});
+        console.log('next next next');
+      }
+    } else {
+      if (currency ==  this.state.current) {
+        let rates = Object.keys(this.props.rates);
+        let nextIndex = rates.indexOf(this.state.current);
+        let newCurrent = rates[nextIndex - 1];
+        console.log('newCurrent');
+        console.log(newCurrent);
+        this.setState({current: newCurrent});
+        console.log('current current current');
+      }
+    }
   }
 
 
