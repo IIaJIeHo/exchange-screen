@@ -15,6 +15,10 @@ export default function exchangeReducer(state = initialState, action) {
     case types.UPDATE_POCKET:
       return Object.assign({}, state, {'pocket': action.pocket});
 
+    case types.START_RATES:
+      console.log('start rates');
+      return state;
+
     default:
       return state;
   }

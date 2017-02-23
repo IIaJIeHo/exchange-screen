@@ -2,3 +2,5 @@ export const UPDATE_RATES = 'UPDATE_RATES';
 export const UPDATE_CURRENT = 'UPDATE_CURRENT';
 export const UPDATE_NEXT = 'UPDATE_NEXT';
 export const UPDATE_POCKET = 'UPDATE_POCKET';
+export const START_RATES = 'START_RATES';
+export const START_RATES_ASYNC = 'START_RATES_ASYNC';

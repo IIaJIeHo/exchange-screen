@@ -12,3 +12,9 @@ export function updateNext(next) {
 export function updatePocket(pocket) {
   return {type: types.UPDATE_POCKET, pocket};
 }
+export function startRates() {
+  return {type: types.START_RATES};
+}
+export function startRatesAsync() {
+  return {type: types.START_RATES_ASYNC};
+}

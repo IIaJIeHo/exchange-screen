@@ -36,6 +36,7 @@ class App extends Component {
     this.setCurrentCurrency = this.setCurrentCurrency.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    this.props.actions.startRatesAsync();
   }
 
   onInputChange(newActiveChange){
