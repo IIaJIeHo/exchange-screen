@@ -16,17 +16,11 @@ class App extends Component {
     super(props);
     
     this.state = {
-      rates: {
-          "EUR": 0.949485,
-          "RUB": 57.767,
-          "USD": 1,
-        },
       current: "EUR",
       next: "RUB",
       activeChange : {
         "USD": 15
       }
-
     }
 
     console.log('this.props.rates');
@@ -83,9 +77,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header onCancel={this.onCancel} onExchange={this.onExchange} rates={this.state.rates} current={this.state.current} next={this.state.next}/>
-        <Currency {...this.state} activeChange={this.state.activeChange} pocket={this.props.pocket} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
-        <Currency {...this.state} activeChange={this.state.activeChange} pocket={this.props.pocket} type="end" setCurrentCurrency={this.setCurrentCurrency}/>
+        <Header onCancel={this.onCancel} onExchange={this.onExchange} rates={this.props.rates} current={this.state.current} next={this.state.next}/>
+        <Currency {...this.state} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
+        <Currency {...this.state} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="end" setCurrentCurrency={this.setCurrentCurrency}/>
         <Numbers />
       </div>
     );
@@ -96,8 +90,19 @@ class App extends Component {
 function mapStateToProps(state, ownProps) {
   console.log('mapStateToProps');
   console.log(state);
+
+  let availableCurrencies = ['USD','RUB','EUR'],
+      rates = {};
+
+  availableCurrencies.forEach(function(cur){
+    if (state.rates[cur]){
+      rates[cur] = state.rates[cur];
+    }
+  });
+
   return {
-    ...state
+    pocket: state.pocket,
+    rates: rates
   };
 }
 

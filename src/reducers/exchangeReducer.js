@@ -16,8 +16,9 @@ export default function exchangeReducer(state = initialState, action) {
       return Object.assign({}, state, {'pocket': action.pocket});
 
     case types.START_RATES:
+      console.log(action);
       console.log('start rates');
-      return state;
+      return Object.assign({}, state, {'rates': action.rates});
 
     default:
       return state;
