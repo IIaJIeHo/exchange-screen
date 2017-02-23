@@ -23,11 +23,6 @@ class App extends Component {
         },
       current: "EUR",
       next: "RUB",
-      pocket: {
-        "USD": 30,
-        "RUB": 10,
-        "EUR": 15
-      },
       activeChange : {
         "USD": 15
       }
@@ -49,29 +44,33 @@ class App extends Component {
 
   onCancel(e){
     e.preventDefault();
-    this.setState({"activeChange": {}});
+    console.log('activeChange');
+    console.log(this.state.activeChange);
+    this.setState({activeChange: {}});
   }
 
   onExchange(e){
+    console.log(this.props.actions);
     e.preventDefault();
-    let pocket = this.state.pocket;
+    let pocket = this.props.pocket;
+    
     let active = this.state.activeChange;
     let current = this.state.current;
     let next = this.state.next; /* Сделать разборку */
-    pocket[current] -= active[current];
-    pocket[next] += active[current]*this.state.rates[next]/this.state.rates[current];
-    console.log(active[current]+' '+this.state.rates[next] + ' '+ this.state.rates[current]);
+    let base = {};
+    base[current] = pocket[current] - active[current];
+    base[next] = pocket[next] + active[current]*this.state.rates[next]/this.state.rates[current];
+    console.log('old pocket');
     console.log(pocket);
-    active[current] = 0;
-    this.setState({
-      pocket: pocket,
-      active: active
-    });
+    pocket = Object.assign({},pocket,base);
+    console.log(active[current]+' '+this.state.rates[next] + ' '+ this.state.rates[current]);
+    console.log('new pocket');
+    console.log(pocket);
+    this.props.actions.updatePocket(pocket);
   }
 
   setCurrentCurrency(currency,type) {
     type == "start" ? this.setState({current: currency}) : this.setState({next: currency});
-
   }
 
 
@@ -84,8 +83,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header onCancel={this.onCancel} onExchange={this.onExchange} rates={this.state.rates} current={this.state.current} next={this.state.next}/>
-        <Currency {...this.state} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
-        <Currency {...this.state} type="end" setCurrentCurrency={this.setCurrentCurrency}/>
+        <Currency {...this.state} activeChange={this.state.activeChange} pocket={this.props.pocket} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
+        <Currency {...this.state} activeChange={this.state.activeChange} pocket={this.props.pocket} type="end" setCurrentCurrency={this.setCurrentCurrency}/>
         <Numbers />
       </div>
     );
@@ -94,6 +93,8 @@ class App extends Component {
 
 
 function mapStateToProps(state, ownProps) {
+  console.log('mapStateToProps');
+  console.log(state);
   return {
     ...state
   };

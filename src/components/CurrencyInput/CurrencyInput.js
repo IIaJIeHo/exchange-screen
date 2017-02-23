@@ -9,7 +9,13 @@ class CurrencyInput extends Component {
     }
 
     this.onChange = this.onChange.bind(this);
-  } 
+  }
+
+  componentWillReceiveProps(props){
+    console.log('componentWillReceiveProps');
+    let newActive = props.active || '0';
+    this.setState({active: newActive});
+  }
 
   onChange(e){
     let val = +e.target.value;

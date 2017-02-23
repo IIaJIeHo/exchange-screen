@@ -38,6 +38,8 @@ class Currency extends Component {
 
 
   render() {
+    console.log('activeChange Currency');
+    console.log(this.props.activeChange);
     let that = this;
     let rates = this.props.rates;
     let ratesKeys = Object.keys(rates);

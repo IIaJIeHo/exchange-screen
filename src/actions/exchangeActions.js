@@ -1,14 +1,14 @@
 import * as types from './actionTypes';
 
-export function UPDATE_RATES(rates) {
+export function updateRates(rates) {
   return {type: types.UPDATE_RATES, rates};
 }
-export function UPDATE_CURRENT(current) {
+export function updateCurrent(current) {
   return {type: types.UPDATE_CURRENT, current};
 }
-export function UPDATE_NEXT(next) {
+export function updateNext(next) {
   return {type: types.UPDATE_NEXT, next};
 }
-export function UPDATE_POCKET(pocket) {
+export function updatePocket(pocket) {
   return {type: types.UPDATE_POCKET, pocket};
 }
