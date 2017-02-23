@@ -54,11 +54,11 @@ class App extends Component {
     let next = this.state.next; /* Сделать разборку */
     let base = {};
     base[current] = pocket[current] - active[current];
-    base[next] = pocket[next] + active[current]*this.state.rates[next]/this.state.rates[current];
+    base[next] = pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current];
     console.log('old pocket');
     console.log(pocket);
     pocket = Object.assign({},pocket,base);
-    console.log(active[current]+' '+this.state.rates[next] + ' '+ this.state.rates[current]);
+    console.log(active[current]+' '+this.props.rates[next] + ' '+ this.props.rates[current]);
     console.log('new pocket');
     console.log(pocket);
     this.props.actions.updatePocket(pocket);
