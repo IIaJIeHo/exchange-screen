@@ -69,6 +69,13 @@ class App extends Component {
     console.log(active[current]+' '+this.props.rates[next] + ' '+ this.props.rates[current]);
     console.log('new pocket');
     console.log(pocket);
+    if (this.state.activeChange[this.state.current] > pocket[this.state.current]){ /* convert to separate function */
+      console.log('notEnough: true');
+      this.setState({notEnough: true});
+    } else {
+      console.log('notEnough: false');
+      this.setState({notEnough: false});
+    }
     this.props.actions.updatePocket(pocket);
   }
 
@@ -83,7 +90,7 @@ class App extends Component {
         console.log(newNext);
         this.setState({next: newNext});
         console.log('next next next');
-        
+
         if (this.state.activeChange[currency] > this.props.pocket[currency]){
           console.log('notEnough: true');
           this.setState({notEnough: true});

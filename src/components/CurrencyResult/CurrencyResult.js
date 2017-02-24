@@ -13,8 +13,8 @@ class CurrencyResult extends Component {
   render() {
     return (
       <div>
-        <p>{this.conversionResult(this.props.currency)}</p>
-        <p>1 {this.props.currency} = {this.props.rates[this.props.current] / this.props.rates[this.props.currency]} {this.props.current}</p>
+        <p>{this.conversionResult(this.props.currency).toFixed(2)}</p>
+        <p>1 {this.props.currency} = {(this.props.rates[this.props.current] / this.props.rates[this.props.currency]).toFixed(2)} {this.props.current}</p>
       </div>
     );
   }
