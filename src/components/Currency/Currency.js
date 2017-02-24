@@ -78,7 +78,7 @@ class Currency extends Component {
 
     let slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        <Slide  {...this.props} currency={key} onInputChange={this.onInputChange} active={this.props.activeChange[key]} />
+        <Slide  {...this.props} currency={key} notEnough={this.props.notEnough} onInputChange={this.onInputChange} active={this.props.activeChange[key]} />
       </div>
       );
 

@@ -18,7 +18,7 @@ class Slide extends Component {
           <p>You have: {this.props.pocket[this.props.currency]}{currentCurrency}</p>
         </div>
         <div className="slide-column">
-          {this.props.type == "start" ? <CurrencyInput active={this.props.active} onInputChange={this.props.onInputChange} /> :
+          {this.props.type == "start" ? <CurrencyInput active={this.props.active} notEnough={this.props.notEnough} onInputChange={this.props.onInputChange} /> :
           <CurrencyResult activeChange={this.props.activeChange} currency={this.props.currency} current={this.props.current} rates={this.props.rates} />}
         </div>
       </div>

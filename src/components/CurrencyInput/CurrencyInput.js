@@ -40,7 +40,10 @@ class CurrencyInput extends Component {
 
   render() {
     return (
-        <input type="text" value={this.state.active} onChange={this.onChange}/>
+        <div>
+          <input type="text" value={this.state.active} onChange={this.onChange}/>
+          {this.props.notEnough ? <span>Not enough money</span> : ''}
+        </div>
     );
   }
 }

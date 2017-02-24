@@ -4,9 +4,9 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <a href="#" onClick={this.props.onCancel}>cancel</a>
+        <button href="#" onClick={this.props.onCancel}>cancel</button>
         1 {this.props.current} = {this.props.rates[this.props.next]/ this.props.rates[this.props.current] }
-        <a href="#" onClick={this.props.onExchange}>exchange</a>
+        <button href="#" disabled={this.props.notEnough} onClick={this.props.onExchange}>exchange</button>
       </div>
     );
   }

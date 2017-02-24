@@ -8,7 +8,7 @@ import axios from 'axios';
 function fetchVersion(){
   return axios({
     method: 'get',
-    url: 'https://openexchangerates.org/api/latest.json?app_id=8d857aef43674ee58b6ca51077b1ab96',
+    url: 'https://openexchangerates.org/api/latest.json?app_id=96',
     cache: false
   });
 }
@@ -25,7 +25,6 @@ export function* fetchData(action) {
       yield put({type: "START_RATES_ERROR", error});
    }
 }
-
 
 export function* startRates() {
   yield takeEvery('START_RATES_ASYNC', fetchData)
