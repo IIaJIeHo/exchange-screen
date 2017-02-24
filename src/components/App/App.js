@@ -124,7 +124,7 @@ class App extends Component {
       <div className="App">
         <Header onCancel={this.onCancel} notEnough={this.state.notEnough} onExchange={this.onExchange} rates={this.props.rates} current={this.state.current} next={this.state.next}/>
         <Currency {...this.state} notEnough={this.state.notEnough} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
-        <Currency {...this.state} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="end" setCurrentCurrency={this.setCurrentCurrency}/>
+        <Currency {...this.state} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="end" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency}/>
         <Numbers />
       </div>
     );

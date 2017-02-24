@@ -14,6 +14,7 @@ class Currency extends Component {
 
     
     this.onInputChange = this.onInputChange.bind(this);
+    this.onInputChangeResult = this.onInputChangeResult.bind(this);
   }
 
   onInputChange(val){
@@ -22,6 +23,11 @@ class Currency extends Component {
     payload[currency] = val;
     let activeChange = Object.assign({}, this.props.activeChange,payload);
     this.props.onInputChange(activeChange);
+  }
+
+  onInputChangeResult(val){
+    let newVal = val*this.props.rates[this.props.current]/this.props.rates[this.props.next];
+    this.onInputChange(newVal);
   }
 
   onChange(e){
@@ -78,7 +84,7 @@ class Currency extends Component {
 
     let slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        <Slide  {...this.props} currency={key} notEnough={this.props.notEnough} onInputChange={this.onInputChange} active={this.props.activeChange[key]} />
+        <Slide  {...this.props} currency={key} notEnough={this.props.notEnough} onInputChange={this.onInputChange} onInputChangeResult={this.onInputChangeResult} active={this.props.activeChange[key]} />
       </div>
       );
 
