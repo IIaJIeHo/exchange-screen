@@ -18,6 +18,12 @@ class CurrencyResult extends Component {
   }
 
   componentWillReceiveProps(props){
+    console.log('--- componentWillReceiveProps CurrencyResult ---');
+    console.log(props.currency);
+    console.log(props.next);
+    if (props.currency !== props.next) {
+      return true;
+    }
     let current = props.activeChange[props.current] || 0;
     let newActive = Math.floor(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100;
     console.log('CHANGE MOTHER');
@@ -31,7 +37,6 @@ class CurrencyResult extends Component {
       console.log('CHANGE componentWillReceiveProps');
       this.setState({active: newActive});
     }
-    
   }
 
   onChange(e){

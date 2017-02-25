@@ -1,16 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import './Header.css'
 
-class Header extends Component {
-  render() {
+const Header = ({onCancel,onExchange,current,next,rates,notEnough}) => {
     return (
       <div className="header">
-        <button className="header-button" href="#" onClick={this.props.onCancel}>cancel</button>
-        <span className="header-exchange">1 {this.props.current} = { (this.props.rates[this.props.next]/ this.props.rates[this.props.current]).toFixed(2) } {this.props.next} </span>
-        <button className="header-button right" href="#" disabled={this.props.notEnough} onClick={this.props.onExchange}>exchange</button>
+        <button className="header-button" 
+                onClick={onCancel}>cancel</button>
+        <span className="header-exchange">
+          1 {current} = { (rates[next]/ rates[current]).toFixed(2) } {next} 
+        </span>
+        <button className="header-button right" 
+                disabled={notEnough} 
+                onClick={onExchange}>exchange</button>
       </div>
     );
-  }
 }
+
+Header.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onExchange: PropTypes.func.isRequired,
+  current: PropTypes.string.isRequired,
+  next: PropTypes.string.isRequired,
+  rates: PropTypes.object.isRequired,
+  notEnough: PropTypes.bool.isRequired
+};
 
 export default Header;

@@ -101,7 +101,7 @@ class Currency extends Component {
       );
 
     return (
-      <div className="currency">
+      <div className={this.props.type == 'start' ? 'currency' : 'currency darken'}>
         <Slider ref={(input) => { this.slider = input; }}  {...settings}>
           {slides}
         </Slider>

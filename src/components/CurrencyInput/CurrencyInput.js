@@ -12,7 +12,7 @@ class CurrencyInput extends Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('componentWillReceiveProps');
+    console.log('----- componentWillReceiveProps CurrencyInput -----');
     let newActive = props.active || '';
     this.setState({active: newActive});
   }

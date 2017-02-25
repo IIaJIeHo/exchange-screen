@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Currency from '../Currency/Currency';
 import Header from '../Header/Header';
-import Numbers from '../Numbers/Numbers';
 import './App.css';
 
 /* make should component update in all components*/
@@ -64,7 +63,9 @@ class App extends Component {
 
   onCancel(e){
     e.preventDefault();
-    this.setState({activeChange: {}});
+    let base = {};
+    base[this.state.current] = '';
+    this.setState({activeChange: Object.assign({},this.state.activeChange,base)});
   }
 
   onExchange(e){
