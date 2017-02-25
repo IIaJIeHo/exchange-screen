@@ -23,6 +23,10 @@
   color: #fff;
   width: 90%;
 }
+.currency-alert {
+  font-size: 12px;
+  color: #ff5e5e;
+}
 
 .currency .slick-dots li button:before{
   color: #fff;

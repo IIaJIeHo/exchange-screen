@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
+import * as helpers from '../../helpers';
 
 class CurrencyInput extends Component {
   constructor(props) {
@@ -12,27 +13,13 @@ class CurrencyInput extends Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('----- componentWillReceiveProps CurrencyInput -----');
     let newActive = props.active || '';
     this.setState({active: newActive});
   }
-  /* treat . input */
 
   onChange(e){
-    console.log('onChange');
-    console.log(e.target.value);
-    let nonNumericRegex = /[^0-9.]+/g;
-    let val = e.target.value.replace(nonNumericRegex, "");
-    if (val === '.'){
-      val = '0.';
-    } else {
-      let arr_val = val.split('.');
-      if (arr_val.length > 1){
-        val = arr_val[0]+'.'+arr_val[1].slice(0,2);
-      }
-    }
+    let val = helpers.validateInput(e.target.value);
 
-    console.log(val);
     this.setState({active: val});
     this.props.onInputChange(val);
   }
@@ -41,11 +28,19 @@ class CurrencyInput extends Component {
   render() {
     return (
         <div>
-          <input className="currency-input" type="text" value={this.state.active} onChange={this.onChange}/>
-          {this.props.notEnough ? <span className="currency-alert" >Not enough money</span> : ''}
+          <input className="currency-input" type="text" 
+                  value={this.state.active} 
+                  onChange={this.onChange}/>
+          {this.props.notEnough&&(this.state.active > 0) ? <div className="currency-alert" >Not enough money</div> : ''}
         </div>
     );
   }
 }
+
+CurrencyInput.propTypes = {
+  active: PropTypes.number,
+  notEnough: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired
+};
 
 export default CurrencyInput;
