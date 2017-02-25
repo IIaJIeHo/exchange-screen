@@ -19,7 +19,7 @@ class App extends Component {
       current: "EUR",
       next: "RUB",
       activeChange : {
-        "USD": 15
+        "USD": "15"
       },
       notEnough: true
     }

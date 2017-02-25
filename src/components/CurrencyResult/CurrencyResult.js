@@ -23,7 +23,10 @@ class CurrencyResult extends Component {
         newActive = Math.floor(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100,
         range = Math.ceil(props.rates[props.currency] / props.rates[props.current]) / 100;
 
-    if (Math.round(Math.abs(newActive - this.state.active)*100)/100 > range){
+    console.log(Math.round(Math.abs(newActive - this.state.active)*100)/100);
+    console.log(range);
+    console.log(newActive);
+    if ((Math.round(Math.abs(newActive - this.state.active)*100)/100 > range)||(newActive <= range)){
       this.setState({active: newActive});
     }
   }
@@ -50,7 +53,7 @@ class CurrencyResult extends Component {
 }
 
 CurrencyResult.propTypes = {
-  active: PropTypes.number,
+  active: PropTypes.string,
   currency: PropTypes.string.isRequired,
   rates: PropTypes.object.isRequired,
   current: PropTypes.string.isRequired,

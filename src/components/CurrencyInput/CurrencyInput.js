@@ -38,7 +38,7 @@ class CurrencyInput extends Component {
 }
 
 CurrencyInput.propTypes = {
-  active: PropTypes.number,
+  active: PropTypes.string,
   notEnough: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired
 };

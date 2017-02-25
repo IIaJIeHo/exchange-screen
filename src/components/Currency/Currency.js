@@ -17,7 +17,7 @@ class Currency extends Component {
         payload = {},
         activeChange;
 
-    payload[currency] = val;
+    payload[currency] = ''+val;
     activeChange = Object.assign({}, this.props.activeChange,payload);
     this.props.onInputChange(activeChange);
   }

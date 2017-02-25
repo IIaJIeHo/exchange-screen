@@ -47,7 +47,7 @@ class Slide extends Component {
 }
 
 Slide.propTypes = {
-  active: PropTypes.number,
+  active: PropTypes.string,
   notEnough: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onInputChangeResult: PropTypes.func.isRequired,
