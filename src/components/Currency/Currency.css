@@ -23,3 +23,10 @@
   color: #fff;
   width: 90%;
 }
+
+.currency .slick-dots li button:before{
+  color: #fff;
+}
+.currency .slick-dots li.slick-active button:before{
+  color: #fff;
+}

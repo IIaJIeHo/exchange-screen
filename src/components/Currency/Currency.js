@@ -26,7 +26,14 @@ class Currency extends Component {
   }
 
   onInputChangeResult(val){
-    let newVal = Math.round(val*this.props.rates[this.props.current]/this.props.rates[this.props.next]*100)/100;
+    console.log('onInputChangeResult');
+    console.log(val);
+    let newVal = val*this.props.rates[this.props.current]/this.props.rates[this.props.next];
+    console.log(newVal);
+    newVal = Math.ceil(newVal*100);
+    console.log(newVal);
+    newVal = newVal/100;
+    console.log(newVal);
     this.onInputChange(newVal);
   }
 

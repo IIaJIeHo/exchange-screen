@@ -19,12 +19,15 @@ class CurrencyResult extends Component {
 
   componentWillReceiveProps(props){
     let current = props.activeChange[props.current] || 0;
-    let newActive = Math.round(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100;
+    let newActive = Math.floor(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100;
     console.log('CHANGE MOTHER');
     console.log(props.activeChange);
     console.log(newActive);
     console.log(this.state.active);
-    if (Math.abs(newActive - this.state.active) > 0.01){
+    let range = Math.ceil(props.rates[props.currency] / props.rates[props.current]) / 100;
+    console.log(range);
+    console.log(Math.round(Math.abs(newActive - this.state.active)*100)/100);
+    if (Math.round(Math.abs(newActive - this.state.active)*100)/100 > range){
       console.log('CHANGE componentWillReceiveProps');
       this.setState({active: newActive});
     }
@@ -46,8 +49,10 @@ class CurrencyResult extends Component {
     }
 
     console.log(val);
-    this.setState({active: val});
-    this.props.onInputChangeResult(val);
+    this.setState({active: val},function () {
+      this.props.onInputChangeResult(val);
+    });
+    
   }
 
   render() {

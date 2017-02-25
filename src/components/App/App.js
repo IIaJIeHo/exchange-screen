@@ -36,7 +36,6 @@ class App extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.notEnough = this.notEnough.bind(this);
     this.props.actions.startRatesAsync();
-    this.notEnough(this.state.activeChange,this.props.pocket,this.state.current);
   }
 
   notEnough(activeChange,pocket,currency){
@@ -52,6 +51,10 @@ class App extends Component {
       console.log('notEnough: false');
       this.setState({notEnough: false});
     }
+  }
+
+  componentDidMount() {
+    this.notEnough(this.state.activeChange,this.props.pocket,this.state.current);
   }
 
   onInputChange(newActiveChange){
@@ -73,9 +76,11 @@ class App extends Component {
     let current = this.state.current;
     let next = this.state.next; /* Сделать разборку */
     let base = {};
-    base[current] = pocket[current] - active[current];
-    base[next] = pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current];
+    base[current] = Math.round((pocket[current] - active[current])*100)/100;
+    base[next] = Math.round((pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current])*100)/100;
     pocket = Object.assign({},pocket,base);
+    console.log('new  pocket!!!!');
+    console.log(pocket);
     this.notEnough(this.state.activeChange,pocket,this.state.current);
     this.props.actions.updatePocket(pocket);
   }
