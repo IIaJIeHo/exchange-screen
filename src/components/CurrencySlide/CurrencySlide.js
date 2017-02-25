@@ -1,9 +1,9 @@
 import React, { Component, PropTypes} from 'react';
 import CurrencyInput from '../CurrencyInput/CurrencyInput';
 import CurrencyResult from '../CurrencyResult/CurrencyResult';
-import './Slide.css';
+import './CurrencySlide.css';
 
-class Slide extends Component {
+class CurrencySlide extends Component {
 
   constructor(props) {
     super(props);
@@ -46,7 +46,7 @@ class Slide extends Component {
   }
 }
 
-Slide.propTypes = {
+CurrencySlide.propTypes = {
   active: PropTypes.string,
   notEnough: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
@@ -57,4 +57,4 @@ Slide.propTypes = {
   rates: PropTypes.object.isRequired
 };
 
-export default Slide;
+export default CurrencySlide;

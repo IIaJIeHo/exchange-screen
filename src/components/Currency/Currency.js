@@ -1,7 +1,7 @@
 import React, { Component,PropTypes } from 'react';
 import Slider from 'react-slick';
 import './Currency.css';
-import Slide from '../Slide/Slide';
+import CurrencySlide from '../CurrencySlide/CurrencySlide';
 
 class Currency extends Component {
 
@@ -53,7 +53,7 @@ class Currency extends Component {
 
     slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        <Slide  {...this.props} 
+        <CurrencySlide  {...this.props} 
                 currency={key} 
                 notEnough={this.props.notEnough} 
                 onInputChange={this.onInputChange} 

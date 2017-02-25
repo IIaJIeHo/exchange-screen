@@ -18,14 +18,11 @@ class CurrencyResult extends Component {
     return +current * this.props.rates[currency] / this.props.rates[this.props.current];
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps(props){ /* maybe just to provide additinal state variable instead of checking*/
     let current = props.activeChange[props.current] || 0,
         newActive = Math.floor(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100,
         range = Math.ceil(props.rates[props.currency] / props.rates[props.current]) / 100;
 
-    console.log(Math.round(Math.abs(newActive - this.state.active)*100)/100);
-    console.log(range);
-    console.log(newActive);
     if ((Math.round(Math.abs(newActive - this.state.active)*100)/100 > range)||(newActive <= range)){
       this.setState({active: newActive});
     }

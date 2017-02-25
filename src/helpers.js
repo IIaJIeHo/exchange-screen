@@ -3,6 +3,8 @@ export function validateInput(value){
     let val = value.replace(nonNumericRegex, "");
     if (val === '.'){
       val = '0.';
+    } else if (val === '00'){
+      val = '0';
     } else {
       let arr_val = val.split('.');
       if (arr_val.length > 1){
