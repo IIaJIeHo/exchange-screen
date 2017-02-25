@@ -29,6 +29,7 @@ class App extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.notEnough = this.notEnough.bind(this);
+    this.shiftRates = this.shiftRates.bind(this);
     this.props.actions.startRatesAsync();
   }
 
@@ -70,22 +71,26 @@ class App extends Component {
     this.props.actions.updatePocket(pocket);
   }
 
+  shiftRates(currency){
+    let ratesKeys = Object.keys(this.props.rates),
+        nextIndex = ratesKeys.indexOf(currency) - 1;
+
+    nextIndex = nextIndex === -1 ?  ratesKeys.length - 1 : nextIndex;
+    return ratesKeys[nextIndex];
+  }
+
   setCurrentCurrency(currency,type) {
-    let rates, nextIndex, newValue;
+    let newValue;
     type == "start" ? this.setState({current: currency}) : this.setState({next: currency});
     if (type == "start") {
       this.notEnough(this.state.activeChange,this.props.pocket,currency);
       if (currency ==  this.state.next) {
-        rates = Object.keys(this.props.rates);
-        nextIndex = rates.indexOf(this.state.next);
-        newValue = rates[nextIndex - 1];
+        newValue = this.shiftRates(this.state.next);
         this.setState({next: newValue});
       }
     } else {
       if (currency ==  this.state.current) {
-        rates = Object.keys(this.props.rates);
-        nextIndex = rates.indexOf(this.state.current);
-        newValue = rates[nextIndex - 1]; /* make a small function for this transform */
+        newValue = this.shiftRates(this.state.current);
         this.setState({current: newValue});
       }
     }

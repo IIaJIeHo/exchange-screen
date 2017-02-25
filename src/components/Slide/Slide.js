@@ -39,7 +39,6 @@ class Slide extends Component {
             currency={this.props.currency} 
             onInputChangeResult={this.props.onInputChangeResult} 
             current={this.props.current} 
-            next={this.props.next}
             rates={this.props.rates} />}
         </div>
       </div>
