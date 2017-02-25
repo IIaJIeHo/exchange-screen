@@ -1,3 +1,25 @@
 .currency {
-  padding: 10px;
+  padding: 10px 10px 30px 10px;
+  background: #1d61ea;
+}
+
+.currency.darken {
+  background: #2b5bce;
+}
+
+.currency-header {
+  font-size: 30px;
+  margin: 5px 0;
+}
+.currency-info {
+  font-size: 16px;
+  margin: 5px 0;
+  opacity: 0.5;
+}
+.currency-input {
+  font-size: 30px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 90%;
 }

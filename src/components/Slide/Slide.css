@@ -5,10 +5,6 @@
   display: inline-block;
   width: 50%;
   vertical-align: top;
-}
-.slide-column h3 {
-  font-size: 30px;
-}
-.slide-column p {
-  font-size: 16px;
+  text-align: left;
+  color: #fff;
 }

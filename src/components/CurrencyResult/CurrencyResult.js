@@ -13,20 +13,19 @@ class CurrencyResult extends Component {
   }
 
   conversionResult(currency){
-    console.log(+this.props.activeChange[this.props.current]);
-    console.log(this.props.rates[currency]);
-    console.log(this.props.rates[this.props.current]);
     let current = this.props.activeChange[this.props.current] || 0;
     return +current * this.props.rates[currency] / this.props.rates[this.props.current];
   }
 
   componentWillReceiveProps(props){
     let current = props.activeChange[props.current] || 0;
-    let newActive = +current * props.rates[props.currency] / props.rates[props.current];
-    console.log('componentWillReceiveProps --------------');
+    let newActive = Math.round(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100;
+    console.log('CHANGE MOTHER');
+    console.log(props.activeChange);
     console.log(newActive);
     console.log(this.state.active);
-    if (Math.abs(newActive - this.state.active) > 0){
+    if (Math.abs(newActive - this.state.active) > 0.01){
+      console.log('CHANGE componentWillReceiveProps');
       this.setState({active: newActive});
     }
     
@@ -54,9 +53,9 @@ class CurrencyResult extends Component {
   render() {
     return (
       <div>
-        <p>{this.conversionResult(this.props.currency)}</p>
-        <input type="text" value={this.state.active} onChange={this.onChange}/>
-        <p>1 {this.props.currency} = {(this.props.rates[this.props.current] / this.props.rates[this.props.currency]).toFixed(2)} {this.props.current}</p>
+        <p className="currency-info">{this.conversionResult(this.props.currency)}</p>
+        <input className="currency-input" type="text" value={this.state.active} onChange={this.onChange}/>
+        <p className="currency-info">1 {this.props.currency} = {(this.props.rates[this.props.current] / this.props.rates[this.props.currency]).toFixed(2)} {this.props.current}</p>
       </div>
     );
   }

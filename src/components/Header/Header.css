@@ -1,0 +1,30 @@
+.header {
+  background: #1d61ea;
+  padding: 10px;
+}
+.header-button{
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  float: left;
+}
+
+.header-button.right{
+  float:right;
+}
+
+.header-button[disabled]{
+  opacity: 0.5;
+  cursor: inherit;
+}
+
+.header-exchange {
+  display: inline-block;
+  padding: 2px 6px;
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 7px;
+  font-size: 14px;
+}

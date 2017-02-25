@@ -8,7 +8,10 @@ import Header from '../Header/Header';
 import Numbers from '../Numbers/Numbers';
 import './App.css';
 
-
+/* make should component update in all components*/
+/* optimise code in all componenent */
+/* make style better of the code */
+/* es-lint suggestion */
 
 class App extends Component {
 
@@ -21,7 +24,7 @@ class App extends Component {
       activeChange : {
         "USD": 15
       },
-      notEnough: false
+      notEnough: true
     }
 
     console.log('this.props.rates');
@@ -31,12 +34,18 @@ class App extends Component {
     this.setCurrentCurrency = this.setCurrentCurrency.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    this.notEnough = this.notEnough.bind(this);
     this.props.actions.startRatesAsync();
+    this.notEnough(this.state.activeChange,this.props.pocket,this.state.current);
   }
 
-  onInputChange(newActiveChange){
-    this.setState({activeChange: newActiveChange});
-    if (newActiveChange[this.state.current] > this.props.pocket[this.state.current]){
+  notEnough(activeChange,pocket,currency){
+    console.log('not Enough');
+    console.log(activeChange);
+    console.log(currency);
+    console.log(activeChange[currency]);
+    console.log(pocket);
+    if ((!activeChange[currency])||(activeChange[currency] <= 0 )||(activeChange[currency] > pocket[currency])){
       console.log('notEnough: true');
       this.setState({notEnough: true});
     } else {
@@ -45,10 +54,13 @@ class App extends Component {
     }
   }
 
+  onInputChange(newActiveChange){
+    this.setState({activeChange: newActiveChange});
+    this.notEnough(newActiveChange,this.props.pocket,this.state.current);
+  }
+
   onCancel(e){
     e.preventDefault();
-    console.log('activeChange');
-    console.log(this.state.activeChange);
     this.setState({activeChange: {}});
   }
 
@@ -63,25 +75,15 @@ class App extends Component {
     let base = {};
     base[current] = pocket[current] - active[current];
     base[next] = pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current];
-    console.log('old pocket');
-    console.log(pocket);
     pocket = Object.assign({},pocket,base);
-    console.log(active[current]+' '+this.props.rates[next] + ' '+ this.props.rates[current]);
-    console.log('new pocket');
-    console.log(pocket);
-    if (this.state.activeChange[this.state.current] > pocket[this.state.current]){ /* convert to separate function */
-      console.log('notEnough: true');
-      this.setState({notEnough: true});
-    } else {
-      console.log('notEnough: false');
-      this.setState({notEnough: false});
-    }
+    this.notEnough(this.state.activeChange,pocket,this.state.current);
     this.props.actions.updatePocket(pocket);
   }
 
   setCurrentCurrency(currency,type) {
     type == "start" ? this.setState({current: currency}) : this.setState({next: currency});
     if (type == "start") {
+      this.notEnough(this.state.activeChange,this.props.pocket,currency);
       if (currency ==  this.state.next) {
         let rates = Object.keys(this.props.rates);
         let nextIndex = rates.indexOf(this.state.next);
@@ -90,14 +92,7 @@ class App extends Component {
         console.log(newNext);
         this.setState({next: newNext});
         console.log('next next next');
-
-        if (this.state.activeChange[currency] > this.props.pocket[currency]){
-          console.log('notEnough: true');
-          this.setState({notEnough: true});
-        } else {
-          console.log('notEnough: false');
-          this.setState({notEnough: false});
-        }
+        
       }
     } else {
       if (currency ==  this.state.current) {
@@ -125,7 +120,6 @@ class App extends Component {
         <Header onCancel={this.onCancel} notEnough={this.state.notEnough} onExchange={this.onExchange} rates={this.props.rates} current={this.state.current} next={this.state.next}/>
         <Currency {...this.state} notEnough={this.state.notEnough} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="start" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency} />
         <Currency {...this.state} activeChange={this.state.activeChange} rates={this.props.rates} pocket={this.props.pocket} type="end" onInputChange={this.onInputChange} setCurrentCurrency={this.setCurrentCurrency}/>
-        <Numbers />
       </div>
     );
   }

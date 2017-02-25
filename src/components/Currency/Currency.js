@@ -26,7 +26,7 @@ class Currency extends Component {
   }
 
   onInputChangeResult(val){
-    let newVal = val*this.props.rates[this.props.current]/this.props.rates[this.props.next];
+    let newVal = Math.round(val*this.props.rates[this.props.current]/this.props.rates[this.props.next]*100)/100;
     this.onInputChange(newVal);
   }
 
@@ -84,7 +84,12 @@ class Currency extends Component {
 
     let slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        <Slide  {...this.props} currency={key} notEnough={this.props.notEnough} onInputChange={this.onInputChange} onInputChangeResult={this.onInputChangeResult} active={this.props.activeChange[key]} />
+        <Slide  {...this.props} 
+                currency={key} 
+                notEnough={this.props.notEnough} 
+                onInputChange={this.onInputChange} 
+                onInputChangeResult={this.onInputChangeResult} 
+                active={this.props.activeChange[key]} />
       </div>
       );
 
