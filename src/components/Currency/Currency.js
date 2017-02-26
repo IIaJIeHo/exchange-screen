@@ -13,19 +13,20 @@ class Currency extends Component {
     this.onInputChangeResult = this.onInputChangeResult.bind(this);
   }
 
-  onInputChange(val){
+  onInputChange(val,topActive){
     let currency = this.props.current,
         payload = {},
-        activeChange;
+        activeChange,
+        topActiveBool = !!!topActive;
 
     payload[currency] = ''+val;
     activeChange = Object.assign({}, this.props.activeChange,payload);
-    this.props.onInputChange(activeChange);
+    this.props.onInputChange(activeChange,topActiveBool);
   }
 
   onInputChangeResult(val){
     let newVal = Math.ceil(val*this.props.rates[this.props.current]/this.props.rates[this.props.next]*100)/100;
-    this.onInputChange(newVal);
+    this.onInputChange(newVal,true);
   }
 
   componentWillReceiveProps(props){

@@ -21,7 +21,7 @@ class CurrencyInput extends Component {
     let currentSlide = helpers.getCurrentSlideNode(Object.keys(this.props.rates).length),
         currentInput = currentSlide.querySelector('.currency-input');
 
-    if (currentInput === this.input) {
+    if (this.props.topActive&&(currentInput === this.input)) {
       this.input.focus();
     }
   }

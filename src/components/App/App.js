@@ -20,6 +20,7 @@ class App extends Component {
       activeChange : {
         "USD": "15"
       },
+      topActive: true, 
       notEnough: true
     }
 
@@ -44,8 +45,8 @@ class App extends Component {
     this.notEnough(this.state.activeChange,this.props.pocket,this.state.current);
   }
 
-  onInputChange(newActiveChange){
-    this.setState({activeChange: newActiveChange});
+  onInputChange(newActiveChange,topActive){
+    this.setState({activeChange: newActiveChange,topActive:topActive});
     this.notEnough(newActiveChange,this.props.pocket,this.state.current);
   }
 

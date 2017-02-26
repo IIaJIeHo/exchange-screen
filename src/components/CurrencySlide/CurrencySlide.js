@@ -31,13 +31,15 @@ class CurrencySlide extends Component {
             active={this.props.active} 
             notEnough={this.props.notEnough} 
             onInputChange={this.props.onInputChange}
-            rates={this.props.rates} /> :
+            rates={this.props.rates}
+            topActive={this.props.topActive} /> :
           <CurrencyResult 
             activeChange={this.props.activeChange} 
             currency={this.props.currency} 
             onInputChangeResult={this.props.onInputChangeResult} 
             current={this.props.current} 
-            rates={this.props.rates} />}
+            rates={this.props.rates}
+            topActive={this.props.topActive} />}
         </div>
       </div>
     );
