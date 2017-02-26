@@ -2,12 +2,13 @@ import React, { Component,PropTypes } from 'react';
 import Slider from 'react-slick';
 import './Currency.css';
 import CurrencySlide from '../CurrencySlide/CurrencySlide';
+import * as helpers from '../../helpers';
 
 class Currency extends Component {
 
   constructor(props) {
     super(props);
-  
+
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputChangeResult = this.onInputChangeResult.bind(this);
   }
@@ -45,16 +46,28 @@ class Currency extends Component {
       dots: true,
       arrows: false,
       initialSlide: ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0,
+      beforeChange: function (currentSlide) {
+        console.log(that.slider);
+        console.log(root.querySelectorAll('.currency.top div.slick-active'));
+
+      },
       afterChange: function (currentSlide) {
         let currency = ratesKeys[currentSlide];
         that.props.setCurrentCurrency(currency,that.props.type);
+        // root.querySelectorAll('.currency.top div.slick-active').forEach(function (el,i) {
+        //   if ((el.dataset['index'] >= 0)&&(el.dataset['index'] < ratesKeys.length)){
+        //     console.log(el.dataset['index']);
+        //     el.querySelector('.currency-input').focus(); /* спрятать в функцию  */
+        //   }
+          
+        // });
       },
     };
 
     slides = ratesKeys.map((key,i) =>
       <div key={i}>
-        <CurrencySlide  {...this.props} 
-                currency={key} 
+        <CurrencySlide {...this.props} 
+                currency={key}
                 notEnough={this.props.notEnough} 
                 onInputChange={this.onInputChange} 
                 onInputChangeResult={this.onInputChangeResult} 
@@ -63,7 +76,7 @@ class Currency extends Component {
       );
 
     return (
-      <div className={this.props.type == 'start' ? 'currency' : 'currency darken'}>
+      <div id={this.props.type == 'start' ? helpers.sliderId : ''} className={this.props.type == 'start' ? 'currency' : 'currency darken'}>
         <Slider ref={(input) => { this.slider = input; }}  {...settings}>
           {slides}
         </Slider>

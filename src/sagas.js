@@ -8,8 +8,7 @@ import axios from 'axios';
 function fetchVersion(){
   return axios({
     method: 'get',
-    url: 'https://openexchangerates.org/api/latest.json?app_id=96',
-    cache: false
+    url: 'https://openexchangerates.org/api/latest.json?app_id=96'
   });
 }
 

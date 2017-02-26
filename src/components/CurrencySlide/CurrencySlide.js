@@ -22,6 +22,7 @@ class CurrencySlide extends Component {
 
   render() {
     let currentCurrency = this.props.type == "start" ? this.props.current : this.props.next;
+
     return (
       <div className="slide">
         <div className="slide-column">
@@ -33,7 +34,8 @@ class CurrencySlide extends Component {
           <CurrencyInput 
             active={this.props.active} 
             notEnough={this.props.notEnough} 
-            onInputChange={this.props.onInputChange} /> :
+            onInputChange={this.props.onInputChange}
+            rates={this.props.rates} /> :
           <CurrencyResult 
             activeChange={this.props.activeChange} 
             currency={this.props.currency} 

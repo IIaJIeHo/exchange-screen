@@ -22,6 +22,7 @@
   border: none;
   color: #fff;
   width: 90%;
+  outline: none;
 }
 .currency-alert {
   font-size: 12px;

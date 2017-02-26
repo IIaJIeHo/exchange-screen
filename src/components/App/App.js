@@ -108,7 +108,7 @@ class App extends Component {
                 rates={this.props.rates} 
                 current={this.state.current} 
                 next={this.state.next}/>
-        <Currency {...this.state} 
+        <Currency className="top" {...this.state} 
                   notEnough={this.state.notEnough} 
                   activeChange={this.state.activeChange} 
                   rates={this.props.rates} 

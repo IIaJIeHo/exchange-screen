@@ -23,14 +23,14 @@ class CurrencyResult extends Component {
         newActive = Math.floor(+current * props.rates[props.currency] / props.rates[props.current] * 100)/100,
         range = Math.ceil(props.rates[props.currency] / props.rates[props.current]) / 100;
 
-    if ((Math.round(Math.abs(newActive - this.state.active)*100)/100 > range)||(newActive <= range)){
+    if ((Math.round(Math.abs(newActive - this.state.active)*100)/100 > range)||((newActive <= range)&&(newActive > 0))){
       this.setState({active: newActive});
     }
   }
 
   onChange(e){
     let val = helpers.validateInput(e.target.value);
-
+    console.log(val);
     this.setState({active: val},function () {
       this.props.onInputChangeResult(val);
     });

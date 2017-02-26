@@ -17,6 +17,16 @@ class CurrencyInput extends Component {
     this.setState({active: newActive});
   }
 
+  componentDidUpdate() {
+    let currentSlide = helpers.getCurrentSlideNode(Object.keys(this.props.rates).length),
+        currentInput = currentSlide.querySelector('.currency-input');
+
+    console.log(currentInput);
+    if (currentInput == this.input) {
+      this.input.focus();
+    }
+  }
+
   onChange(e){
     let val = helpers.validateInput(e.target.value);
 
@@ -28,7 +38,7 @@ class CurrencyInput extends Component {
   render() {
     return (
         <div>
-          <input className="currency-input" type="text" 
+          <input ref={(input) => { this.input = input; }} className="currency-input" type="text" 
                   value={this.state.active} 
                   onChange={this.onChange}/>
           {this.props.notEnough&&(this.state.active > 0) ? <div className="currency-alert" >Not enough money</div> : ''}
@@ -40,7 +50,8 @@ class CurrencyInput extends Component {
 CurrencyInput.propTypes = {
   active: PropTypes.string,
   notEnough: PropTypes.bool.isRequired,
-  onInputChange: PropTypes.func.isRequired
+  onInputChange: PropTypes.func.isRequired,
+  shouldFocus: PropTypes.bool
 };
 
 export default CurrencyInput;
