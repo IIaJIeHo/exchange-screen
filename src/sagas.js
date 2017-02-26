@@ -4,20 +4,21 @@ import * as actionTypes from './actions/actionTypes';
 import * as exchangeActions from './actions/exchangeActions';
 import axios from 'axios';
 
+const openExchangeRatesId = '8d857aef43674ee58b6ca51077b1ab96';
+
 function fetchVersion(){
   return axios({
     method: 'get',
-    url: 'https://openexchangerates.org/api/latest.json?app_id=96'
+    url: 'https://openexchangerates.org/api/latest.json?app_id='+openExchangeRatesId
   });
 }
 
 export function* fetchData(action) {
    try {
-      yield delay(30000);
       const data = yield call(fetchVersion);
-      console.log('fetchData');
       let rates = data.data.rates;
       yield put(exchangeActions.startRates(rates));
+      yield delay(30000);
       yield put(exchangeActions.startRatesAsync());
    } catch (error) {
       yield put(exchangeActions.startRatesError(error));

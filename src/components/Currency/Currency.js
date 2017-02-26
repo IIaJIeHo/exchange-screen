@@ -81,6 +81,7 @@ Currency.propTypes = {
   type: PropTypes.string.isRequired,
   current: PropTypes.string.isRequired,
   next: PropTypes.string.isRequired,
+  topActive: PropTypes.bool.isRequired
 };
 
 export default Currency;

@@ -54,7 +54,8 @@ CurrencySlide.propTypes = {
   currency: PropTypes.string.isRequired,
   current: PropTypes.string.isRequired,
   next: PropTypes.string.isRequired,
-  rates: PropTypes.object.isRequired
+  rates: PropTypes.object.isRequired,
+  topActive: PropTypes.bool.isRequired
 };
 
 export default CurrencySlide;

@@ -29,7 +29,7 @@ class CurrencyResult extends Component {
 
   onChange(e){
     let val = helpers.validateInput(e.target.value);
-    console.log(val);
+
     this.setState({active: val},function () {
       this.props.onInputChangeResult(val);
     });
@@ -53,7 +53,8 @@ CurrencyResult.propTypes = {
   currency: PropTypes.string.isRequired,
   rates: PropTypes.object.isRequired,
   current: PropTypes.string.isRequired,
-  onInputChangeResult: PropTypes.func.isRequired
+  onInputChangeResult: PropTypes.func.isRequired,
+  topActive: PropTypes.bool.isRequired
 };
 
 export default CurrencyResult;

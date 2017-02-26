@@ -39,7 +39,7 @@ class CurrencyInput extends Component {
         <div>
           <span className="currency-sign">−</span><input ref={(input) => { this.input = input; }} className="currency-input" type="text" 
                   value={this.state.active} 
-                  onChange={this.onChange}/>
+                  onChange={this.onChange} />
           {this.props.notEnough&&(this.state.active > 0) ? <div className="currency-alert" >Not enough money</div> : ''}
         </div>
     );
@@ -50,7 +50,7 @@ CurrencyInput.propTypes = {
   active: PropTypes.string,
   notEnough: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  shouldFocus: PropTypes.bool
+  topActive: PropTypes.bool.isRequired
 };
 
 export default CurrencyInput;

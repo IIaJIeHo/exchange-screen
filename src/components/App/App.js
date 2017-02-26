@@ -6,8 +6,6 @@ import Currency from '../Currency/Currency';
 import Header from '../Header/Header';
 import './App.css';
 
-/* make style better of the code */
-/* es-lint suggestion */
 
 class App extends Component {
 
@@ -115,7 +113,8 @@ class App extends Component {
                   pocket={this.props.pocket} 
                   type="start" 
                   onInputChange={this.onInputChange} 
-                  setCurrentCurrency={this.setCurrentCurrency} />
+                  setCurrentCurrency={this.setCurrentCurrency}
+                  onExchange={this.onExchange} />
         <Currency {...this.state} 
                   activeChange={this.state.activeChange} 
                   rates={this.props.rates} 
