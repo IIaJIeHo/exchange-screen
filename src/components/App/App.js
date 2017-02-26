@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import Currency from '../Currency/Currency';
 import Header from '../Header/Header';
 import './App.css';
+import * as helpers from '../../helpers';
 
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
     
     this.state = {
       current: "EUR",
-      next: "RUB",
+      next: "GBP",
       activeChange : {
         "USD": "15"
       },
@@ -133,7 +134,7 @@ App.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  let availableCurrencies = ['USD','RUB','EUR'],
+  let availableCurrencies = helpers.availableCurrencies,
       rates = {};
 
   availableCurrencies.forEach(function(cur){

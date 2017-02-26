@@ -26,6 +26,8 @@ export function validateInput(value){
 
 export const sliderId = 'topSlider';
 
+export let availableCurrencies = ['USD','GBP','EUR'];
+
 export function getCurrentSlideNode(ratesAmount) {
   let slide;
   root.querySelectorAll('#'+sliderId+' div.slick-active').forEach(function (el,i) {
