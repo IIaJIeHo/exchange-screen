@@ -62,8 +62,8 @@ class App extends Component {
         next = this.state.next,
         base = {};
 
-    base[current] = Math.round((pocket[current] - active[current])*100)/100;
-    base[next] = Math.round((pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current])*100)/100;
+    base[current] = Math.ceil((pocket[current] - active[current])*100)/100;
+    base[next] = Math.floor((pocket[next] + active[current]*this.props.rates[next]/this.props.rates[current])*100)/100;
     pocket = Object.assign({},pocket,base);
 
     this.notEnough(this.state.activeChange,pocket,this.state.current);
