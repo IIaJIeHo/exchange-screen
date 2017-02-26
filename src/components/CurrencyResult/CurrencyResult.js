@@ -40,7 +40,7 @@ class CurrencyResult extends Component {
   render() {
     return (
       <div>
-        <input className="currency-input" type="text" value={this.state.active} onChange={this.onChange}/>
+        <span className="currency-sign">+</span><input className="currency-input" type="text" value={this.state.active} onChange={this.onChange}/>
         <p className="currency-info">
         1 {this.props.currency} = {(this.props.rates[this.props.current] / this.props.rates[this.props.currency]).toFixed(2)} {this.props.current}
         </p>

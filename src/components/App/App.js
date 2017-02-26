@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import * as exchangeActions from '../../actions/exchangeActions';
-import Slider from 'react-slick';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Currency from '../Currency/Currency';
@@ -81,15 +80,15 @@ class App extends Component {
 
   setCurrentCurrency(currency,type) {
     let newValue;
-    type == "start" ? this.setState({current: currency}) : this.setState({next: currency});
-    if (type == "start") {
+    type === "start" ? this.setState({current: currency}) : this.setState({next: currency});
+    if (type === "start") {
       this.notEnough(this.state.activeChange,this.props.pocket,currency);
-      if (currency ==  this.state.next) {
+      if (currency ===  this.state.next) {
         newValue = this.shiftRates(this.state.next);
         this.setState({next: newValue});
       }
     } else {
-      if (currency ==  this.state.current) {
+      if (currency ===  this.state.current) {
         newValue = this.shiftRates(this.state.current);
         this.setState({current: newValue});
       }

@@ -21,8 +21,7 @@ class CurrencyInput extends Component {
     let currentSlide = helpers.getCurrentSlideNode(Object.keys(this.props.rates).length),
         currentInput = currentSlide.querySelector('.currency-input');
 
-    console.log(currentInput);
-    if (currentInput == this.input) {
+    if (currentInput === this.input) {
       this.input.focus();
     }
   }
@@ -38,7 +37,7 @@ class CurrencyInput extends Component {
   render() {
     return (
         <div>
-          <input ref={(input) => { this.input = input; }} className="currency-input" type="text" 
+          <span className="currency-sign">−</span><input ref={(input) => { this.input = input; }} className="currency-input" type="text" 
                   value={this.state.active} 
                   onChange={this.onChange}/>
           {this.props.notEnough&&(this.state.active > 0) ? <div className="currency-alert" >Not enough money</div> : ''}

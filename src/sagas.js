@@ -1,8 +1,7 @@
 import { delay } from 'redux-saga';
-import { actionChannel, call, take, put, race, takeEvery } from 'redux-saga/effects'
+import {call, put, takeEvery } from 'redux-saga/effects'
 import * as actionTypes from './actions/actionTypes';
 import * as exchangeActions from './actions/exchangeActions';
-import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
 function fetchVersion(){
@@ -18,13 +17,13 @@ export function* fetchData(action) {
       const data = yield call(fetchVersion);
       console.log('fetchData');
       let rates = data.data.rates;
-      yield put({type: "START_RATES", rates});
-      yield put({ type: 'START_RATES_ASYNC' });
+      yield put(exchangeActions.startRates(rates));
+      yield put(exchangeActions.startRatesAsync());
    } catch (error) {
-      yield put({type: "START_RATES_ERROR", error});
+      yield put(exchangeActions.startRatesError(error));
    }
 }
 
 export function* startRates() {
-  yield takeEvery('START_RATES_ASYNC', fetchData)
+  yield takeEvery(actionTypes.START_RATES_ASYNC, fetchData)
 }

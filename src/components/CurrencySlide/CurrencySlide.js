@@ -5,12 +5,8 @@ import './CurrencySlide.css';
 
 class CurrencySlide extends Component {
 
-  constructor(props) {
-    super(props);
-  } 
-
   shouldComponentUpdate(nextProps, nextState) {
-    let currentCurrency = this.props.type == "start" ? nextProps.current : nextProps.next;
+    let currentCurrency = this.props.type === "start" ? nextProps.current : nextProps.next;
 
     if (nextProps.currency === currentCurrency) {
       return true;
@@ -21,7 +17,7 @@ class CurrencySlide extends Component {
 
 
   render() {
-    let currentCurrency = this.props.type == "start" ? this.props.current : this.props.next;
+    let currentCurrency = this.props.type === "start" ? this.props.current : this.props.next;
 
     return (
       <div className="slide">
@@ -30,7 +26,7 @@ class CurrencySlide extends Component {
           <p className="currency-info">You have: {this.props.pocket[this.props.currency].toFixed(2)}{currentCurrency}</p>
         </div>
         <div className="slide-column">
-          {this.props.type == "start" ? 
+          {this.props.type === "start" ? 
           <CurrencyInput 
             active={this.props.active} 
             notEnough={this.props.notEnough} 

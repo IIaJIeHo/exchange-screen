@@ -1,4 +1,4 @@
-import React, { Component,PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import './Header.css'
 
 const Header = ({onCancel,onExchange,current,next,rates,notEnough}) => {
@@ -7,7 +7,7 @@ const Header = ({onCancel,onExchange,current,next,rates,notEnough}) => {
         <button className="header-button" 
                 onClick={onCancel}>cancel</button>
         <span className="header-exchange">
-          1 {current} = { (rates[next]/ rates[current]).toFixed(2) } {next} 
+          1 {current} = { (rates[next]/ rates[current]).toFixed(4) } {next} 
         </span>
         <button className="header-button right" 
                 disabled={notEnough} 

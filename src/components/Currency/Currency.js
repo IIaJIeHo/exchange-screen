@@ -30,7 +30,7 @@ class Currency extends Component {
 
   componentWillReceiveProps(props){
     let rates = Object.keys(props.rates);
-    props.type == "start" ? this.slider.slickGoTo(rates.indexOf(props.current)) : this.slider.slickGoTo(rates.indexOf(props.next));    
+    props.type === "start" ? this.slider.slickGoTo(rates.indexOf(props.current)) : this.slider.slickGoTo(rates.indexOf(props.next));    
   }
 
 
@@ -38,29 +38,17 @@ class Currency extends Component {
     let that = this,
         rates = this.props.rates,
         ratesKeys = Object.keys(rates),
-        currentCurrency = this.props.type == "start" ? this.props.current : this.props.next,
+        currentCurrency = this.props.type === "start" ? this.props.current : this.props.next,
         settings,
         slides;
 
     settings = {
       dots: true,
       arrows: false,
-      initialSlide: ratesKeys.indexOf(currentCurrency) != -1 ? ratesKeys.indexOf(currentCurrency) : 0,
-      beforeChange: function (currentSlide) {
-        console.log(that.slider);
-        console.log(root.querySelectorAll('.currency.top div.slick-active'));
-
-      },
+      initialSlide: ratesKeys.indexOf(currentCurrency) !== -1 ? ratesKeys.indexOf(currentCurrency) : 0,
       afterChange: function (currentSlide) {
         let currency = ratesKeys[currentSlide];
         that.props.setCurrentCurrency(currency,that.props.type);
-        // root.querySelectorAll('.currency.top div.slick-active').forEach(function (el,i) {
-        //   if ((el.dataset['index'] >= 0)&&(el.dataset['index'] < ratesKeys.length)){
-        //     console.log(el.dataset['index']);
-        //     el.querySelector('.currency-input').focus(); /* спрятать в функцию  */
-        //   }
-          
-        // });
       },
     };
 
@@ -76,7 +64,7 @@ class Currency extends Component {
       );
 
     return (
-      <div id={this.props.type == 'start' ? helpers.sliderId : ''} className={this.props.type == 'start' ? 'currency' : 'currency darken'}>
+      <div id={this.props.type === 'start' ? helpers.sliderId : ''} className={this.props.type === 'start' ? 'currency' : 'currency darken'}>
         <Slider ref={(input) => { this.slider = input; }}  {...settings}>
           {slides}
         </Slider>
